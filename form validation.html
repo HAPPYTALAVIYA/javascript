@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        body
+        {
+            background-color: grey;
+            font-family:'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif
+        }
+        form
+        {
+            background-color: white;
+            /* text-align: center; */
+            width:500px;
+            /* height: 100vh; */
+            font-weight: bold;
+            border:none;
+            border-radius: 10px;
+            margin: auto;
+            padding:20px;
+        }
+        input
+        {
+            width: 100%;
+            margin-top: 7px;
+            margin-bottom: 7px;
+
+        }
+        .radio
+        {
+            width: 15px;
+            margin-top: 7px;
+            margin-bottom: 7px;
+        }
+        h1{
+            text-align: center;
+        }
+        .btn
+        {
+            background-color: green;
+            color:white;
+            margin-top: 10px;
+            border:none;
+            border-radius: 4px;
+            cursor: pointer;
+            padding: 10px 24px;
+            width:30%
+        }
+
+    </style>
+</head>
+<body>
+    <h1>Registration Form</h1>
+    <form>
+       
+        first name:<br><input type="text" class="input" name="fname" id="fname" value=""><br><span id="erfname"></span><br>
+        last name:<input type="text" class="input" name="lname" id="lname" value=""><br><span id="erlname"></span><br>
+        Email : <input type="email"  class="input" name="email" id="email" value=""><br><span id="eremail"></span><br>
+        Mobile No:<input type="number" class="input" id="mno" value=""><br><span id="ermobile"></span><br>
+        Gender : <br><input type="radio" class="radio" name="gender" id="male">Male &nbsp;<span id="ergender"></span>
+        <input type="radio" class="radio" name="gender" id="Female">Female&nbsp;
+        <input type="radio" class="radio" name="gender" id="Other">Other<br><br>
+        <!-- State:
+        <select id="state" onchange="updatecities">
+            <option>Gujarat</option>
+            <option>Maharastra</option>
+            <option>Rajasthan</option>
+        </select><span id="erstate"></span><br>
+        City:
+         -->
+
+        Password : <input type="password" id="pass" value=""><br><br>
+        Confirm Password: <input type="password" id="cpass" value=""><br><span id="erpass"></span><br>
+
+        <input type="button" class="btn" value="Submit" onclick="formsub()">
+    </form>
+    <script>
+        fname=document.getElementById("fname");
+        lname=document.getElementById("lname");
+        email=document.getElementById("email");
+        mno=document.getElementById("mno");
+        gender=document.getElementById("gender");
+        cpass=document.getElementById("cpass");
+
+        function formsub()
+        {
+            //fname
+            if(fname.value == "")
+            {
+                document.getElementById("erfname").innerText = "First Name must be required."
+                document.getElementById("erfname").style.color = "red";
+            }  
+            else
+            {
+                document.getElementById("erfname").innerText = ""
+            }
+
+            //lname
+            if(lname.value == "")
+            {
+                document.getElementById("erlname").innerText="lname must be resquired"
+                document.getElementById("erlname").style.color="red";
+            }
+            else
+            {
+                document.getElementById("erlname").innerText=""
+            }
+
+            //email
+            if(email.value == "")
+            {
+                document.getElementById("eremail").innerText = "Email must be required."
+                document.getElementById("eremail").style.color = "red";
+            }
+            else
+            {
+                document.getElementById("eremail").innerText = ""
+            }
+
+            //mobile no
+            if(mno.value.length != 10)
+            {
+                document.getElementById("ermobile").innerText="mobile no should be 10 digits."
+                document.getElementById("ermobile").style.color="red";
+            }
+            else
+            {
+                document.getElementById("ermobile").innerText=""
+            }
+
+            //password
+            if(pass.value != cpass.value)
+            {
+                document.getElementById("erpass").innerText="password does not match."
+                document.getElementById("erpass").style.color="red";
+            }
+            else
+            {
+                document.getElementById("erpass").innerText="password match."
+                document.getElementById("erpass").style.color="green";
+            }
+
+
+            //gender
+            if(gender.value == "")
+            {
+                document.getElementById("ergender").innerText = "please select your gender."
+                document.getElementById("ergender").style.color = "red";
+            }
+            else
+            {
+                document.getElementById("ergender").innerText = ""
+            }
+
+            //hobbies
+
+
+           
+        }
+    </script>
+</body>
+</html>
