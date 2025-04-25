@@ -35,6 +35,12 @@
             margin-top: 7px;
             margin-bottom: 7px;
         }
+        .hobi
+        {
+            width: 15px;
+            margin-top: 7px;
+            margin-bottom: 7px;
+        }
         h1{
             text-align: center;
         }
@@ -60,33 +66,97 @@
         last name:<input type="text" class="input" name="lname" id="lname" value=""><br><span id="erlname"></span><br>
         Email : <input type="email"  class="input" name="email" id="email" value=""><br><span id="eremail"></span><br>
         Mobile No:<input type="number" class="input" id="mno" value=""><br><span id="ermobile"></span><br>
-        Gender : <br><input type="radio" class="radio" name="gender" id="male">Male &nbsp;<span id="ergender"></span>
-        <input type="radio" class="radio" name="gender" id="Female">Female&nbsp;
-        <input type="radio" class="radio" name="gender" id="Other">Other<br><br>
-        <!-- State:
-        <select id="state" onchange="updatecities">
+        Address:<input type="text" class="input" id="address" value=""><br><span id="eraddress"></span><br>
+        Pincode:<input type="number" class="input" id="pincode" value=""><br><span id="erpincod"></span><br>
+        Gender : <br><input type="radio" class="radio" name="gender" id="pmale">Male &nbsp;
+        <input type="radio" class="radio" name="gender" id="pfemale">Female&nbsp;
+        <input type="radio" class="radio" name="gender" id="pother">Other<br><br><span id="ergender"></span><br>
+       
+        State:
+        <select id="state" onchange="ccity()">
+            <option>Select State</option>
             <option>Gujarat</option>
             <option>Maharastra</option>
             <option>Rajasthan</option>
-        </select><span id="erstate"></span><br>
+        </select><span id="erstate"></span><br><br>
+
         City:
-         -->
+        <select id="city" >
+            <option>Select City</option>
+        </select><span id="ercity"></span><br><br>
+
+         Hobbies : <br><br>
+         <input type="checkbox" class="hobi" name="hobi[]" value="cricket">Cricket
+         <input type="checkbox" class="hobi" name="hobi[]" value="singing">Singing
+         <input type="checkbox" class="hobi" name="hobi[]" value="reading">Reading    <br> <div id="info"></div>   <br> 
 
         Password : <input type="password" id="pass" value=""><br><br>
-        Confirm Password: <input type="password" id="cpass" value=""><br><span id="erpass"></span><br>
+        Confirm Password: <input type="password" id="cpass" value="" onkeyup="ppass()"><br><span id="erpass" ></span><br>
 
         <input type="button" class="btn" value="Submit" onclick="formsub()">
     </form>
+   
     <script>
         fname=document.getElementById("fname");
         lname=document.getElementById("lname");
         email=document.getElementById("email");
         mno=document.getElementById("mno");
-        gender=document.getElementById("gender");
+        pmale=document.getElementById("pmale");
+        pfemale=document.getElementById("pfemale");
+        pother=document.getElementById("pother");
         cpass=document.getElementById("cpass");
-
+        address=document.getElementById("address");
+        var x = document.getElementsByClassName("hobi");
+        city=document.getElementById("city");
+        state=document.getElementById("state");
+        function ppass()
+        {
+            if(pass.value != cpass.value)
+            {
+                document.getElementById("erpass").innerText="password does not match."
+                document.getElementById("erpass").style.color="red";
+            }
+            else
+            {
+                document.getElementById("erpass").innerText="password match."
+                document.getElementById("erpass").style.color="green";
+            }
+        }
+        
+        function ccity()
+        {
+            // city=document.getElementById("city").value;
+            // state=document.getElementById("state").value;
+            if(state.value == "Gujarat")
+            {
+                document.getElementById("city").innerHTML=`
+                <option>Select City</option>
+                <option>Ahmedabad</option>
+                <option>Surat</option>
+                <option>Rajkot</option>`
+            }
+            if(state.value  == "Rajasthan")
+            {
+                document.getElementById("city").innerHTML=`
+                <option>Select City</option>
+                <option>Jaipur</option>
+                <option>Uadipur</option>
+                <option>Ajmer</option>`
+            }
+            if(state.value == "Maharastra")
+            {
+                document.getElementById("city").innerHTML=`
+                <option>Select City</option>
+                <option>Mumbai</option>
+                <option>Nasik</option>
+                <option>Pune</option>`
+            }
+        }
         function formsub()
         {
+            var hobi="";
+            console.log(hobi);
+
             //fname
             if(fname.value == "")
             {
@@ -131,21 +201,22 @@
                 document.getElementById("ermobile").innerText=""
             }
 
-            //password
-            if(pass.value != cpass.value)
+           //city
+
+            if(city.value == "")
             {
-                document.getElementById("erpass").innerText="password does not match."
-                document.getElementById("erpass").style.color="red";
-            }
-            else
-            {
-                document.getElementById("erpass").innerText="password match."
-                document.getElementById("erpass").style.color="green";
+                document.getElementById("ercity").innerText="please select your city."
+                document.getElementById("ercity").style.color="red";
             }
 
-
+            //state
+            if(state.value == "")
+            {
+                document.getElementById("erstate").innerText="please select your state."
+                document.getElementById("erstate").style.color="red";
+            }
             //gender
-            if(gender.value == "")
+            if(pmale.checked == "" && pfemale.checked == "" && pother.checked == "")
             {
                 document.getElementById("ergender").innerText = "please select your gender."
                 document.getElementById("ergender").style.color = "red";
@@ -155,10 +226,28 @@
                 document.getElementById("ergender").innerText = ""
             }
 
+
             //hobbies
-
-
-           
+            var hobi;
+            if (hobi== "") 
+            {
+            document.getElementById("info").innerText = "Please select at least one hobby.";
+            document.getElementById("info").style.color = "red";
+             } 
+             else 
+             {
+                for (var i = 0; i < x.length; i++) 
+                {
+                if (x[i].checked == true) 
+                {
+                    hobi += x[i].value + " ";
+                }
+            }
+            document.getElementById("info").innerText = "You have selected: " + hobi;
+            document.getElementById("info").style.color = "green";
+            }
+            
+                     
         }
     </script>
 </body>
